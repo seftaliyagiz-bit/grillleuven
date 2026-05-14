@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grill Leuven — Kebab · Pizza · Frituur</title>
+  <meta name="description" content="Grill Leuven op de Naamsestraat 33. Vers kebab, shoarma, pizza en friet. Open 7 dagen per week van 11:00 tot 06:00." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital@1&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root {
+      --black:   #000000;
+      --dark:    #111111;
+      --card:    #1a1a1a;
+      --red:     #d32f2f;
+      --white:   #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, .logo-text { font-family: 'Bebas Neue', sans-serif; }
+
+    a { text-decoration: none; color: inherit; }
+
+    img { display: block; max-width: 100%; }
+
+    /* ── FADE-UP ANIMATION ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ══════════════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════════════ */
+    #navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--black);
+      border-bottom: 2px solid var(--red);
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .nav-logo .logo-main {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--white);
+      letter-spacing: 2px;
+    }
+    .nav-logo .logo-accent {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--red);
+      letter-spacing: 2px;
+    }
+    .nav-logo .logo-sub {
+      font-size: 0.65rem;
+      color: #aaa;
+      margin-left: 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .lang-toggle {
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      color: var(--red);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      border: 1px solid var(--red);
+      padding: 4px 10px;
+      border-radius: 3px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-toggle:hover {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .btn-order-nav {
+      background: var(--red);
+      color: var(--white);
+      padding: 8px 18px;
+      border-radius: 3px;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .btn-order-nav:hover { background: #b71c1c; }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s;
+    }
+
+    /* ══════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 100px 24px 60px;
+      background:
+        linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)),
+        url('images/hero.png') center/cover no-repeat;
+    }
+
+    .hero-red-line {
+      position: absolute;
+      top: 64px;
+      left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--red);
+      color: var(--white);
+      font-size: 0.75rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 18px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .hero-title {
+      font-size: clamp(5rem, 14vw, 12rem);
+      line-height: 0.9;
+      letter-spacing: 4px;
+    }
+    .hero-title .t-white { color: var(--white); display: block; }
+    .hero-title .t-red   { color: var(--red);   display: block; }
+
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: rgba(255,255,255,0.88);
+      margin: 20px 0 32px;
+      line-height: 1.7;
+    }
+
+    .hero-icons {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 36px;
+      letter-spacing: 0.5px;
+    }
+    .hero-icons span { display: flex; align-items: center; gap: 6px; }
+
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #b71c1c; transform: translateY(-2px); }
+
+    .btn-outline {
+      border: 2px solid var(--white);
+      color: var(--white);
+      padding: 14px 32px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover {
+      background: var(--white);
+      color: var(--black);
+      transform: translateY(-2px);
+    }
+
+    .hero-open {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 1px;
+    }
+    .pulse-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: pulse 1.8s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 24px; left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      color: rgba(255,255,255,0.4);
+      font-size: 1.4rem;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ══════════════════════════════════════════
+       LATE NIGHT STRIP
+    ══════════════════════════════════════════ */
+    #strip {
+      background: var(--red);
+      padding: 40px 40px;
+      text-align: center;
+    }
+    #strip h2 {
+      font-size: clamp(1.4rem, 4vw, 2.4rem);
+      letter-spacing: 3px;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+    .strip-badges {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .strip-badge {
+      background: rgba(0,0,0,0.25);
+      color: var(--white);
+      border-radius: 30px;
+      padding: 10px 22px;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ══════════════════════════════════════════
+       MENU
+    ══════════════════════════════════════════ */
+    #menu {
+      background: var(--black);
+      padding: 90px 40px;
+      text-align: center;
+    }
+    .section-title {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      letter-spacing: 4px;
+      color: var(--white);
+      margin-bottom: 60px;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto 48px;
+    }
+    .menu-card {
+      border: 2px solid var(--red);
+      border-radius: 4px;
+      padding: 36px 28px;
+      text-align: left;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .menu-card:hover {
+      background: var(--card);
+      transform: translateY(-4px);
+    }
+    .menu-card .card-icon {
+      font-size: 2.2rem;
+      margin-bottom: 16px;
+    }
+    .menu-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .menu-card p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.75);
+    }
+    .btn-order-menu {
+      display: inline-block;
+      background: var(--red);
+      color: var(--white);
+      padding: 14px 36px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-order-menu:hover { background: #b71c1c; transform: translateY(-2px); }
+
+    /* ══════════════════════════════════════════
+       GALLERY
+    ══════════════════════════════════════════ */
+    #gallery {
+      background: var(--dark);
+      padding: 90px 40px;
+      text-align: center;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 8px;
+      aspect-ratio: 4/3;
+      border: 2px solid transparent;
+      transition: border-color 0.25s;
+    }
+    .gallery-item:hover { border-color: var(--red); }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .gallery-item:hover img { transform: scale(1.06); }
+
+    /* ══════════════════════════════════════════
+       ABOUT
+    ══════════════════════════════════════════ */
+    #about {
+      background: var(--white);
+      color: var(--black);
+      padding: 90px 40px;
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      align-items: center;
+    }
+    .about-img {
+      border: 4px solid var(--black);
+      border-radius: 4px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+    }
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .about-text h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      letter-spacing: 3px;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+    .about-text .about-italic {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--red);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .about-text p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 28px;
+    }
+    .about-stats {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .stat {
+      border: 2px solid var(--black);
+      border-radius: 4px;
+      padding: 12px 20px;
+      text-align: center;
+    }
+    .stat .stat-val {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      color: var(--red);
+      display: block;
+    }
+    .stat .stat-lbl {
+      font-size: 0.72rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #555;
+    }
+
+    /* ══════════════════════════════════════════
+       REVIEWS
+    ══════════════════════════════════════════ */
+    #reviews {
+      background: var(--black);
+      padding: 90px 40px;
+      text-align: center;
+    }
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto 36px;
+    }
+    .review-card {
+      background: var(--card);
+      border-radius: 8px;
+      padding: 30px 24px;
+      text-align: left;
+    }
+    .review-stars {
+      color: var(--red);
+      font-size: 1rem;
+      margin-bottom: 14px;
+    }
+    .review-text {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+    .review-author {
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+    .reviews-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .reviews-links a {
+      color: var(--white);
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.25);
+      padding: 10px 22px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .reviews-links a:hover { border-color: var(--red); color: var(--red); }
+
+    /* ══════════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════════ */
+    #contact {
+      background: var(--dark);
+      padding: 90px 40px;
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .contact-inner .section-title { margin-bottom: 36px; text-align: left; }
+
+    .contact-info { display: flex; flex-direction: column; gap: 16px; }
+    .contact-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+    }
+    .contact-row i { color: var(--red); width: 18px; margin-top: 2px; flex-shrink: 0; }
+    .contact-row a { color: rgba(255,255,255,0.85); }
+    .contact-row a:hover { color: var(--red); }
+
+    .map-wrap {
+      margin-top: 24px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid #333;
+    }
+
+    /* Contact form */
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .contact-form input,
+    .contact-form textarea {
+      background: var(--card);
+      border: 1px solid #333;
+      border-radius: 4px;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      padding: 14px 16px;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus { border-color: var(--red); }
+    .contact-form textarea { resize: vertical; min-height: 130px; }
+    .contact-form button {
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      border-radius: 4px;
+      padding: 14px 32px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.2s;
+      align-self: flex-start;
+    }
+    .contact-form button:hover { background: #b71c1c; }
+    .form-success {
+      display: none;
+      color: var(--red);
+      font-size: 0.9rem;
+      padding: 12px 0;
+    }
+
+    /* ══════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════ */
+    footer {
+      background: var(--black);
+      border-top: 2px solid #1a1a1a;
+      padding: 40px 40px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+    .footer-logo .logo-main { font-size: 1.6rem; }
+    .footer-logo .logo-accent { font-size: 1.6rem; }
+    .footer-logo .footer-addr {
+      font-size: 0.78rem;
+      color: #666;
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+    .footer-copy {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #555;
+      line-height: 1.8;
+    }
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--red);
+      letter-spacing: 0.5px;
+      transition: opacity 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-links a:hover { opacity: 0.7; }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      #navbar { padding: 0 20px; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: var(--black); padding: 20px; border-bottom: 2px solid var(--red); gap: 16px; }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .btn-order-nav { display: none; }
+      .lang-toggle { padding: 3px 8px; font-size: 0.72rem; }
+
+      .menu-grid,
+      .reviews-grid,
+      .gallery-grid { grid-template-columns: 1fr; }
+
+      .about-inner,
+      .contact-inner { grid-template-columns: 1fr; gap: 36px; }
+
+      .footer-inner { grid-template-columns: 1fr; text-align: center; }
+      .footer-links { align-items: center; }
+
+      #menu, #gallery, #about, #reviews, #contact { padding: 60px 20px; }
+      #strip { padding: 36px 20px; }
+      footer { padding: 36px 20px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .hero-icons { gap: 12px; font-size: 0.78rem; }
+      .strip-badges { gap: 10px; }
+      .about-stats { gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <span class="logo-main">GRILL</span>
+    <span class="logo-accent">LEUVEN</span>
+    <span class="logo-sub">Kebab · Pizza · Frituur</span>
+  </a>
+
+  <div class="hamburger" id="hamburger" aria-label="Menu" role="button" tabindex="0">
+    <span></span><span></span><span></span>
+  </div>
+
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#menu"    data-nl="Menu"     data-en="Menu">Menu</a></li>
+    <li><a href="#about"   data-nl="Over ons" data-en="About">Over ons</a></li>
+    <li><a href="#contact" data-nl="Bezorging" data-en="Delivery">Bezorging</a></li>
+    <li><a href="#contact" data-nl="Contact"  data-en="Contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <span class="lang-toggle" id="langToggle">NL | EN</span>
+    <a href="https://www.takeaway.com" target="_blank" rel="noopener" class="btn-order-nav"
+       data-nl="Bestel nu" data-en="Order now">Bestel nu</a>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="hero-red-line"></div>
+
+  <div class="fade-up">
+    <div class="hero-badge">🔥 Open 7/7 &nbsp;·&nbsp; 11:00 – 06:00 &nbsp;·&nbsp; Naamsestraat 33</div>
+
+    <h1 class="hero-title">
+      <span class="t-white">GRILL</span>
+      <span class="t-red">LEUVEN</span>
+    </h1>
+
+    <p class="hero-sub">
+      <span data-nl="Kebab · Shoarma · Pizza · Frituur<br>Vers bereid — dag en nacht"
+            data-en="Kebab · Shoarma · Pizza · Fries<br>Freshly made — day and night">
+        Kebab · Shoarma · Pizza · Frituur<br>Vers bereid — dag en nacht
+      </span>
+    </p>
+
+    <div class="hero-icons">
+      <span>🥙 Kebab</span>
+      <span>🍕 Pizza</span>
+      <span>🍟 Frituur</span>
+      <span>🌙 <span data-nl="Tot 06:00" data-en="Until 06:00">Tot 06:00</span></span>
+    </div>
+
+    <div class="hero-ctas">
+      <a href="#menu" class="btn-primary"
+         data-nl="Bekijk ons menu" data-en="View our menu">Bekijk ons menu</a>
+      <a href="https://www.takeaway.com" target="_blank" rel="noopener" class="btn-outline"
+         data-nl="Bestel online" data-en="Order online">Bestel online</a>
+    </div>
+
+    <div class="hero-open">
+      <span class="pulse-dot"></span>
+      <span data-nl="Elke dag open · 11:00 – 06:00" data-en="Open every day · 11:00 – 06:00">
+        Elke dag open · 11:00 – 06:00
+      </span>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><i class="fa fa-chevron-down"></i></div>
+</section>
+
+<!-- ═══════════════ LATE NIGHT STRIP ═══════════════ -->
+<section id="strip">
+  <h2 class="fade-up" data-nl="Open tot 06:00 — altijd voor je klaar"
+      data-en="Open until 06:00 — always there for you">
+    Open tot 06:00 — altijd voor je klaar
+  </h2>
+  <div class="strip-badges fade-up">
+    <div class="strip-badge">🌙 <span data-nl="7 dagen open" data-en="Open 7 days">7 dagen open</span></div>
+    <div class="strip-badge">🕕 <span data-nl="Tot 06:00 's nachts" data-en="Until 06:00 AM">Tot 06:00 's nachts</span></div>
+    <div class="strip-badge">💳 <span data-nl="Betaalkaarten aanvaard" data-en="Cards accepted">Betaalkaarten aanvaard</span></div>
+    <div class="strip-badge">🛵 <span data-nl="Takeaway &amp; bezorging" data-en="Takeaway &amp; delivery">Takeaway &amp; bezorging</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════ MENU ═══════════════ -->
+<section id="menu">
+  <h2 class="section-title fade-up" data-nl="Ons Menu" data-en="Our Menu">Ons Menu</h2>
+
+  <div class="menu-grid">
+    <div class="menu-card fade-up">
+      <div class="card-icon">🥙</div>
+      <h3 data-nl="Durum Kebab &amp; Shoarma" data-en="Durum Kebab &amp; Shoarma">Durum Kebab &amp; Shoarma</h3>
+      <p data-nl="Durum kebab met schapenvlees, vers brood en groenten naar keuze. Shoarma pita met knoflooksaus en/of sambal."
+         data-en="Durum kebab with lamb, fresh bread and vegetables of choice. Shoarma pita with garlic sauce and/or sambal.">
+        Durum kebab met schapenvlees, vers brood en groenten naar keuze. Shoarma pita met knoflooksaus en/of sambal.
+      </p>
+    </div>
+    <div class="menu-card fade-up">
+      <div class="card-icon">🍕</div>
+      <h3 data-nl="Pizza" data-en="Pizza">Pizza</h3>
+      <p data-nl="Turkse pizza (lahmacun), Italiaanse pizza en andere varianten — vers uit de oven."
+         data-en="Turkish pizza (lahmacun), Italian pizza and other varieties — fresh from the oven.">
+        Turkse pizza (lahmacun), Italiaanse pizza en andere varianten — vers uit de oven.
+      </p>
+    </div>
+    <div class="menu-card fade-up">
+      <div class="card-icon">🍟</div>
+      <h3 data-nl="Snack &amp; Frituur" data-en="Snacks &amp; Fries">Snack &amp; Frituur</h3>
+      <p data-nl="Lekkere friet met saus naar keuze. Diverse gefrituurde snacks."
+         data-en="Delicious fries with sauce of choice. Various fried snacks.">
+        Lekkere friet met saus naar keuze. Diverse gefrituurde snacks.
+      </p>
+    </div>
+  </div>
+
+  <a href="https://www.takeaway.com" target="_blank" rel="noopener" class="btn-order-menu fade-up"
+     data-nl="Bestel online →" data-en="Order online →">Bestel online →</a>
+</section>
+
+<!-- ═══════════════ GALLERY ═══════════════ -->
+<section id="gallery">
+  <h2 class="section-title fade-up" data-nl="Onze Gerechten" data-en="Our Food">Onze Gerechten</h2>
+
+  <div class="gallery-grid">
+    <div class="gallery-item fade-up">
+      <img src="images/food-1.png" alt="Kapsalon — Grill Leuven"
+           onerror="this.src='https://images.unsplash.com/photo-1561651188-d207bbec4ec3?w=800'" />
+    </div>
+    <div class="gallery-item fade-up">
+      <img src="images/interior.png" alt="Grill Leuven interior"
+           onerror="this.src='https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800'" />
+    </div>
+    <div class="gallery-item fade-up">
+      <img src="images/interior-2.png" alt="Grill Leuven tezgah"
+           onerror="this.src='https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800'" />
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-img fade-up">
+      <img src="images/interior.png" alt="Grill Leuven interieur"
+           onerror="this.src='https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800'" />
+    </div>
+    <div class="about-text fade-up">
+      <h2 data-nl="Vers. Lekker. Dag en nacht." data-en="Fresh. Delicious. Day and night.">
+        Vers. Lekker. Dag en nacht.
+      </h2>
+      <p class="about-italic"
+         data-nl="Nieuw eigenaarschap sinds herfst 2019 — een frisse start met kwaliteit en hygiëne voorop."
+         data-en="New ownership since autumn 2019 — a fresh start with quality and hygiene first.">
+        Nieuw eigenaarschap sinds herfst 2019 — een frisse start met kwaliteit en hygiëne voorop.
+      </p>
+      <p data-nl="Grill Leuven op de Naamsestraat is jouw go-to plek voor verse kebab, shoarma, pizza en friet. Dag en nacht open, zeven dagen per week. Onze nieuwe eigenaren staan bekend om hun vriendelijkheid en topkwaliteit. Betaalkaarten aanvaard."
+         data-en="Grill Leuven on Naamsestraat is your go-to spot for fresh kebab, shoarma, pizza and fries. Open day and night, seven days a week. Our new owners are known for their friendliness and top quality. Cards accepted.">
+        Grill Leuven op de Naamsestraat is jouw go-to plek voor verse kebab, shoarma, pizza en friet.
+        Dag en nacht open, zeven dagen per week. Onze nieuwe eigenaren staan bekend om hun vriendelijkheid
+        en topkwaliteit. Betaalkaarten aanvaard.
+      </p>
+      <div class="about-stats">
+        <div class="stat">
+          <span class="stat-val">4.1★</span>
+          <span class="stat-lbl">Google</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">7/7</span>
+          <span class="stat-lbl" data-nl="open" data-en="open">open</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">06:00</span>
+          <span class="stat-lbl" data-nl="Tot 06:00" data-en="Until 06:00">Tot 06:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ REVIEWS ═══════════════ -->
+<section id="reviews">
+  <h2 class="section-title fade-up"
+      data-nl="Wat onze klanten zeggen" data-en="What our customers say">
+    Wat onze klanten zeggen
+  </h2>
+
+  <div class="reviews-grid">
+    <div class="review-card fade-up">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">
+        "The owners of the new place are extremely nice, the food is fresh and tasty — the most hygienic snack bar in Leuven I've been to."
+      </p>
+      <div class="review-author">— Google Review</div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="review-stars">⭐⭐⭐⭐⭐</div>
+      <p class="review-text">
+        "Delicious kebab, big portions! Food: 5 &nbsp;·&nbsp; Service: 5 &nbsp;·&nbsp; Atmosphere: 4"
+      </p>
+      <div class="review-author">— Google Review</div>
+    </div>
+    <div class="review-card fade-up">
+      <div class="review-stars">⭐⭐⭐⭐</div>
+      <p class="review-text">
+        "Staff is terrific here. Professional service plays a great role in the success of this restaurant. Nice atmosphere."
+      </p>
+      <div class="review-author">— Restaurant Guru</div>
+    </div>
+  </div>
+
+  <div class="reviews-links fade-up">
+    <a href="https://maps.google.com/?q=Grill+Leuven+Naamsestraat+33" target="_blank" rel="noopener">
+      <i class="fab fa-google"></i> Google Maps
+    </a>
+    <a href="https://www.facebook.com/Grill-Leuven-125330948862981" target="_blank" rel="noopener">
+      <i class="fab fa-facebook"></i> Facebook
+    </a>
+  </div>
+</section>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact">
+  <div class="contact-inner">
+    <!-- Left column -->
+    <div>
+      <h2 class="section-title fade-up" data-nl="Contact" data-en="Contact">Contact</h2>
+
+      <div class="contact-info fade-up">
+        <div class="contact-row">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Naamsestraat 33, 3000 Leuven</span>
+        </div>
+        <div class="contact-row">
+          <i class="fas fa-phone"></i>
+          <a href="tel:+3216233411">+32 16 23 34 11</a>
+        </div>
+        <div class="contact-row">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:bera_dost@yahoo.com">bera_dost@yahoo.com</a>
+        </div>
+        <div class="contact-row">
+          <i class="fas fa-clock"></i>
+          <span data-nl="Ma – Zo: 11:00 – 06:00" data-en="Mon – Sun: 11:00 – 06:00">
+            Ma – Zo: 11:00 – 06:00
+          </span>
+        </div>
+        <div class="contact-row">
+          <i class="fas fa-credit-card"></i>
+          <span data-nl="Betaalkaarten aanvaard · Afhalen · Bezorging"
+                data-en="Cards accepted · Takeaway · Delivery">
+            Betaalkaarten aanvaard · Afhalen · Bezorging
+          </span>
+        </div>
+      </div>
+
+      <div class="map-wrap fade-up" style="margin-top:28px;">
+        <iframe
+          src="https://www.google.com/maps?q=Naamsestraat+33,+3000+Leuven&output=embed"
+          width="100%"
+          height="320"
+          style="border:0;border-radius:8px;display:block;"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Right column: form -->
+    <div class="fade-up">
+      <form class="contact-form" id="contactForm" onsubmit="submitForm(event)">
+        <input type="text" id="formName" required
+               data-placeholder-nl="Naam" data-placeholder-en="Name" placeholder="Naam" />
+        <input type="email" id="formEmail" required
+               data-placeholder-nl="Email" data-placeholder-en="Email" placeholder="Email" />
+        <textarea id="formMsg" required
+                  data-placeholder-nl="Bericht" data-placeholder-en="Message" placeholder="Bericht"></textarea>
+        <button type="submit" data-nl="Verstuur →" data-en="Send →">Verstuur →</button>
+        <p class="form-success" id="formSuccess"
+           data-nl="Bedankt! We antwoorden zo snel mogelijk."
+           data-en="Thanks! We'll get back to you soon.">
+          Bedankt! We antwoorden zo snel mogelijk.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <div>
+        <span class="logo-main">GRILL </span><span class="logo-accent">LEUVEN</span>
+      </div>
+      <div class="footer-addr">
+        Naamsestraat 33 · 3000 Leuven<br>
+        <span data-nl="Ma–Zo: 11:00 – 06:00" data-en="Mon–Sun: 11:00 – 06:00">Ma–Zo: 11:00 – 06:00</span>
+      </div>
+    </div>
+    <div class="footer-copy">
+      © 2026 · Grill Leuven<br>
+      BTW 0727991037<br>
+      <a href="https://grillleuven.be" style="color:#555;">grillleuven.be</a>
+    </div>
+    <div class="footer-links">
+      <a href="https://www.facebook.com/Grill-Leuven-125330948862981" target="_blank" rel="noopener">
+        <i class="fab fa-facebook"></i> Facebook
+      </a>
+      <a href="https://www.takeaway.com" target="_blank" rel="noopener">
+        <i class="fas fa-motorcycle"></i> Takeaway.com
+      </a>
+      <a href="https://grillleuven.be" target="_blank" rel="noopener">
+        <i class="fas fa-globe"></i> grillleuven.be
+      </a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── LANGUAGE TOGGLE ── */
+  let currentLang = 'nl';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll('[data-nl],[data-en]').forEach(el => {
+      const val = el.getAttribute('data-' + lang);
+      if (val !== null) el.innerHTML = val;
+    });
+
+    document.querySelectorAll('[data-placeholder-nl],[data-placeholder-en]').forEach(el => {
+      const ph = el.getAttribute('data-placeholder-' + lang);
+      if (ph) el.placeholder = ph;
+    });
+
+    document.getElementById('langToggle').textContent = lang === 'nl' ? 'NL | EN' : 'EN | NL';
+  }
+
+  document.getElementById('langToggle').addEventListener('click', () => {
+    applyLang(currentLang === 'nl' ? 'en' : 'nl');
+  });
+
+  /* ── HAMBURGER ── */
+  const hamburger = document.getElementById('hamburger');
+  const navLinks  = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  hamburger.addEventListener('keydown', e => { if (e.key === 'Enter') navLinks.classList.toggle('open'); });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  /* ── FADE-UP INTERSECTION OBSERVER ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  /* ── CONTACT FORM ── */
+  function submitForm(e) {
+    e.preventDefault();
+    const success = document.getElementById('formSuccess');
+    success.style.display = 'block';
+    document.getElementById('contactForm').reset();
+    setTimeout(() => { success.style.display = 'none'; }, 6000);
+  }
+
+  /* ── HERO fallback background ── */
+  (function() {
+    const hero = document.getElementById('hero');
+    const img = new Image();
+    img.onload = function() {};
+    img.onerror = function() {
+      hero.style.backgroundImage =
+        "linear-gradient(rgba(0,0,0,0.72),rgba(0,0,0,0.72)), url('https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=1600')";
+    };
+    img.src = 'images/hero.png';
+  })();
+</script>
+</body>
+</html>
